@@ -15,6 +15,9 @@ class ProjectList(APIView):
         serializer = ProjectSerializer(projects, many=True)
         return Response(serializer.data)
 
+    # def get_queryset(self):
+    #     projects = Project.objects.all()
+    #     return projects
 
     def post(self, request):
         serializer = ProjectSerializer(data=request.data)
@@ -69,3 +72,25 @@ class PledgeList(APIView):
             serializer.errors,
             status=status.HTTP_400_BAD_REQUEST
         )
+
+# Inherit from class ProjectLIst to return a count of total project, total pledges and $ amount of pledges
+class ProjectStatistics(ProjectList):
+
+    def statistics(self,request):
+        # projects = self.get_queryset()
+
+        projects = Project.objects.all()
+        pledges = Pledge.objects.all()        
+        statistics = {  'project_count': projects.count(),
+                        'pledges_count': pledges.count(),
+                        'pledges_amount': 0 
+                     }
+        return Response(statistics)
+
+    def get(self, request):
+        return self.statistics(request)
+
+    # def get(self, request):
+    #     projects = Project.objects.all()
+    #     # serializer = ProjectSerializer(projects, many=True)
+    #     return Response("hello")
