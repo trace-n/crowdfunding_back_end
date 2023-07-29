@@ -22,8 +22,10 @@ by Tracey Nguyen
     - [ ] Target amount to fundraise
     - [ ] Whether it is currently open to accepting new supporters or not
     - [ ] When the project was created
+    - [ ] When the project ends
     - [ ] School Name
     - [ ] Website
+
 
 * [] User can make a Pledge
     - [ ] An amount
