@@ -22,7 +22,8 @@ class ProjectList(APIView):
     def post(self, request):
         serializer = ProjectSerializer(data=request.data)
         if serializer.is_valid():
-            serializer.save()
+            # serializer.save()
+            serializer.save(owner=request.user)
             # return Response(serializer.data)
             return Response(
                 serializer.data, 
@@ -80,10 +81,13 @@ class ProjectStatistics(ProjectList):
         # projects = self.get_queryset()
 
         projects = Project.objects.all()
-        pledges = Pledge.objects.all()        
+        pledges = Pledge.objects.all() 
+        # for i in pledges:            
+        # pledges_amount =        
         statistics = {  'project_count': projects.count(),
                         'pledges_count': pledges.count(),
-                        'pledges_amount': 0 
+                        'pledges_amount': 0 ,
+                        'number_pledgers': 0
                      }
         return Response(statistics)
 

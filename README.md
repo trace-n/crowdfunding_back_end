@@ -60,7 +60,13 @@ by Tracey Nguyen
 | HTTP Method | Url | Purpose | Request Body | Successful Response Code | Authentication <br /> Authorization
 | --- | ------- | ------ | ---- | -----| ----|*
 | GET | projects/ | Return all projects | N/A | 200 | N/A |
-| POST | projects/ | Create a new project | project object | 201 | User must be logged in. |
+| POST | projects/ | Create a new project | Project object | 201 | User must be logged in. |
+| GET | projects/1/ | Return the project with ID of "1" | N/A | 200 | N/A |
+| PUT | projects/1/ | Update the project with ID of "1" | Project object | 200 | User must be logged in.<br> User must be the project owner |
+| GET | pledges/ | Return all pledges | N/A | 200 | N/A |
+| POST | pledges/ | Create a new pledge | Pledge object | 201 | User must be logged in.<br> User must not be the owner of the project|
+| GET | pledges/1/ | Return the pledge with ID of "1" | N/A | 200 | N/A |
+| DELETE | pledges/1/ | Deletes the pledge with ID of "1" | Project object | 200 | User must be logged in.<br> User must be the pledge owner |
 
 ## Database Schema
 {{ Insert your database schema }}
