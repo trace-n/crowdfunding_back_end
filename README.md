@@ -15,24 +15,24 @@ by Tracey Nguyen
     - [ ] Bio
             
 * [] User can create, edit, display a project
-    - [ ] Title
-    - [ ] Owner (a user)
-    - [ ] Description
+    - [X] Title
+    - [X] Owner (a user)
+    - [X] Description
     - [ ] Image
-    - [ ] Target amount to fundraise
+    - [X] Target amount to fundraise
     - [ ] Whether it is currently open to accepting new supporters or not
-    - [ ] When the project was created
+    - [X] When the project was created
     - [ ] When the project ends
     - [ ] School Name
     - [ ] Website
 
 
 * [] User can make a Pledge
-    - [ ] An amount
-    - [ ] The project the pledge is for
-    - [ ] The supporter/user (i.e. who created the pledge)
+    - [X] An amount
+    - [X] The project the pledge is for
+    - [X] The supporter/user (i.e. who created the pledge)
     - [ ] Whether the pledge is anonymous or not
-    - [ ] A comment to go along with the pledge
+    - [X] A comment to go along with the pledge
     - [ ] Other
         
 * [] User can display/change/cancel Pledge
@@ -41,24 +41,24 @@ by Tracey Nguyen
 
 
 ### Stretch Goals
-{{ Outline three features that will be your stretch goals if you finish yo*ur MVP }}
+{{ Outline three features that will be your stretch goals if you finish your MVP }}
 
-* [] Display statistics on the home page # projects, pledges, $
+* [X] Display statistics on the home page # projects, pledges, $
 * [] Add categories for projects
-* [] Search project function
+* [] Search project based on categories or title/description
 * [] Change currency/language
 * [] Remind me
 * [] Like / Dislike
 * [] Percentage funded
-* [] Days to go/left for deadline
+* [] Days to go/ left for deadline
 * [] Last donation
 
 
 
 ## API Specification
 
-| HTTP Method | Url | Purpose | Request Body | Successful Response Code | Authentication <br /> Authorization
-| --- | ------- | ------ | ---- | -----| ----|*
+| HTTP Method | Url | Purpose | Request Body | Successful Response Code | Authentication <br /> Authorization |
+| :---: | :--- | :--- | :--- | :---: | :--- |
 | GET | projects/ | Return all projects | N/A | 200 | N/A |
 | POST | projects/ | Create a new project | Project object | 201 | User must be logged in. |
 | GET | projects/1/ | Return the project with ID of "1" | N/A | 200 | N/A |
@@ -66,6 +66,7 @@ by Tracey Nguyen
 | GET | pledges/ | Return all pledges | N/A | 200 | N/A |
 | POST | pledges/ | Create a new pledge | Pledge object | 201 | User must be logged in.<br> User must not be the owner of the project|
 | GET | pledges/1/ | Return the pledge with ID of "1" | N/A | 200 | N/A |
+| PUT | pledges/1/ | Update the pledge with ID of "1" | Pledge object | 200 | User must be logged in.<br> User must be the pledge owner |
 | DELETE | pledges/1/ | Deletes the pledge with ID of "1" | Project object | 200 | User must be logged in.<br> User must be the pledge owner |
 
 ## Database Schema

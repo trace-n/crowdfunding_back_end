@@ -6,6 +6,7 @@ from .serializers import ProjectSerializer, PledgeSerializer, ProjectDetailSeria
 from django.http import Http404
 from rest_framework import status, permissions
 from .permissions import IsOwnerOrReadOnly
+from django.db.models import Sum
 
 # Create your views here.
 
@@ -107,7 +108,7 @@ class PledgeList(APIView):
             status=status.HTTP_400_BAD_REQUEST
         )
 
-# Inherit from class ProjectLIst to return a count of total project, total pledges and $ amount of pledges
+# Inherit from class ProjectLIst to return a count of total project, total pledges, $ amount of pledges, unique supporters
 class ProjectStatistics(ProjectList):
 
     def statistics(self,request):
@@ -115,12 +116,13 @@ class ProjectStatistics(ProjectList):
 
         projects = Project.objects.all()
         pledges = Pledge.objects.all() 
-        # for i in pledges:            
-        # pledges_amount =        
+        pledges_amt = pledges.aggregate(Sum('amount'))
+        unique_supporters = pledges.values_list('supporter',flat=True).distinct().count()
+     
         statistics = {  'project_count': projects.count(),
-                        'pledges_count': pledges.count(),
-                        'pledges_amount': 0 ,
-                        'number_pledgers': 0
+                        'pledge_count': pledges.count(),
+                        'pledge_amount': pledges_amt['amount__sum'],
+                        'unique_supporters': unique_supporters
                      }
         return Response(statistics)
 
