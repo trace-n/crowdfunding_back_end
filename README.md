@@ -8,9 +8,9 @@ by Tracey Nguyen
 ## Features
 {{ The features your MVP will include. (Remember this is a working document, you can change these as you go!) }}
 * [] User can Login/Logout 
-    - [ ] Username
-    - [ ] Email
-    - [ ] Password
+    - [X] Username
+    - [X] Email
+    - [X] Password
     - [ ] Image
     - [ ] Bio
             
@@ -49,7 +49,7 @@ by Tracey Nguyen
 * [] Change currency/language
 * [] Remind me
 * [] Like / Dislike
-* [] Percentage funded
+* [] Percentage funded - display as graph
 * [] Days to go/ left for deadline
 * [] Last donation
 
@@ -57,7 +57,7 @@ by Tracey Nguyen
 
 ## API Specification
 
-| HTTP Method | Url | Purpose | Request Body | Successful Response Code | Authentication <br /> Authorization |
+| HTTP Method | URL | Purpose | Request Body | Successful Response Code | Authentication <br /> Authorization |
 | :---: | :--- | :--- | :--- | :---: | :--- |
 | GET | projects/ | Return all projects | N/A | 200 | N/A |
 | POST | projects/ | Create a new project | Project object | 201 | User must be logged in. |
@@ -68,6 +68,9 @@ by Tracey Nguyen
 | GET | pledges/1/ | Return the pledge with ID of "1" | N/A | 200 | N/A |
 | PUT | pledges/1/ | Update the pledge with ID of "1" | Pledge object | 200 | User must be logged in.<br> User must be the pledge owner |
 | DELETE | pledges/1/ | Deletes the pledge with ID of "1" | Project object | 200 | User must be logged in.<br> User must be the pledge owner |
+| POST | users/ | Create a new user | User object | 201 | N/A |
+| GET | users/1/ | Return the user with ID of "1" | User object | 200 | User must be logged in |
+| PUT | users/1/ | Update the user with ID of "1" | User object | 200 | User must be logged in |
 
 ## Database Schema
 {{ Insert your database schema }}
