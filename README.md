@@ -32,8 +32,9 @@ by Tracey Nguyen
     - [X] The project the pledge is for
     - [X] The supporter/user (i.e. who created the pledge)
     - [ ] Whether the pledge is anonymous or not
-    - [ ] If the project is not currently open, pledge cannot be created/updated 
+    - [X] If the project is not currently open, pledge cannot be created/updated 
     - [X] If the supporter is not the project owner, pledge can be created
+    - [] Supporter can delete pledge if the project is open
     - [X] A comment to go along with the pledge
     - [ ] Other??
         
@@ -66,10 +67,10 @@ by Tracey Nguyen
 | GET | projects/1/ | Return the project with ID of "1" | N/A | 200 | N/A |
 | PUT | projects/1/ | Update the project with ID of "1" | Project object | 200 | User must be logged in.<br> User must be the project owner |
 | GET | pledges/ | Return all pledges | N/A | 200 | N/A |
-| POST | pledges/ | Create a new pledge | Pledge object | 201 | User must be logged in.<br> User must not be the owner of the project|
+| POST | pledges/ | Create a new pledge | Pledge object | 201 | User must be logged in.<br> User must not be the owner of the project<br>Project must be open|
 | GET | pledges/1/ | Return the pledge with ID of "1" | N/A | 200 | N/A |
-| PUT | pledges/1/ | Update the pledge with ID of "1" | Pledge object | 200 | User must be logged in.<br> User must be the pledge owner |
-| DELETE | pledges/1/ | Deletes the pledge with ID of "1" | Project object | 200 | User must be logged in.<br> User must be the pledge owner |
+| PUT | pledges/1/ | Update the pledge with ID of "1" | Pledge object | 200 | User must be logged in.<br> User must be the pledge owner<br>Project must be open |
+| DELETE | pledges/1/ | Deletes the pledge with ID of "1" | Project object | 200 | User must be logged in.<br> User must be the pledge owner<br>Project must be open |
 | POST | users/ | Create a new user | User object | 201 | N/A |
 | GET | users/1/ | Return the user with ID of "1" | User object | 200 | User must be logged in |
 | PUT | users/1/ | Update the user with ID of "1" | User object | 200 | User must be logged in |

@@ -82,6 +82,8 @@ class ProjectDetail(APIView):
             status=status.HTTP_400_BAD_REQUEST
         )
     
+    # def del(self, request, pk):
+
 class PledgeList(APIView):
     permission_classes = [
         permissions.IsAuthenticatedOrReadOnly,
@@ -101,22 +103,16 @@ class PledgeList(APIView):
         # print("pledge=", pledge, pledge['project'])
         project = Project.objects.get(pk=pledge['project'])
 
-        # check if the project is open for pledges
-        # check_open = project.date_end.isoformat() > datetime.datetime.now().isoformat()
-        # print("check_open=", check_open)
-
         # print("compare proj owner to request user",project.owner, request.user)
         # project owner must not be the requesting user when creating a pledge        
         self.check_object_permissions(self.request, project)
 
         if project.date_end.date() > datetime.datetime.now().date():
             serializer = PledgeSerializer(data=request.data)
-            # print(serializer)
-            # print(serializer.initial_data['project'])
 
             if serializer.is_valid():
                 # print(serializer.validated_data)
-                print("ser_data",serializer.validated_data['project'].id)
+                # print("ser_data",serializer.validated_data['project'].id)
                 
                 serializer.save(supporter=request.user)            
                 # serializer.save()
@@ -132,7 +128,6 @@ class PledgeList(APIView):
             )
         else:
             return Response(
-                # "Project is not open",
                 { 'message': "Project is not open" },                
                 status=status.HTTP_400_BAD_REQUEST
             )
@@ -158,7 +153,7 @@ class PledgeDetail(APIView):
     
     def put(self, request, pk):
         pledge = self.get_object(pk)
-        print('pledge',pledge.project.id)
+        # print('pledge',pledge.project.id)
         # print("pledge project", pledge['project'])
         self.check_object_permissions(self.request, pledge)
 
@@ -173,33 +168,52 @@ class PledgeDetail(APIView):
         )
 
         if serializer.is_valid():
-#  check the serializer for the data to access if project is open
-            # print(serializer.validated_data)
-            print(serializer.validated_data['project'].id)
-            # project = Project.objects.get(pk=serializer.validated_data['project'])
+            #  check the serializer for the data to access if project is open
+            # print(serializer.validated_data['project'].id)
+            project = Project.objects.get(pk=serializer.validated_data['project'].id)
             
-            # print(project,"project")
-            # if project.date_end.date() > datetime.datetime.now().date():
-             
+            if project.date_end.date() > datetime.datetime.now().date():
 
-            serializer.save()
-            return Response(
-                serializer.data,
-                status=status.HTTP_200_OK
-            )
+                serializer.save()
+                return Response(
+                    serializer.data,
+                    status=status.HTTP_200_OK
+                )
+            else:
+                return Response(
+                    { 'message': "Project is not open" },
+                    status=status.HTTP_400_BAD_REQUEST
+                )      
+
         
         return Response(
             serializer.errors,
             status=status.HTTP_400_BAD_REQUEST
         )
     
-        # else:
-        #     return Response(
-        #         { 'message': "Project is not open" },
-        #         status=status.HTTP_400_BAD_REQUEST
-        #     )        
+    def delete(self, request, pk):
+        pledge = self.get_object(pk)
+        self.check_object_permissions(self.request, pledge)
 
-# Inherit from class ProjectLIst to return a count of total project, total pledges, $ amount of pledges, unique supporters
+        project = Project.objects.get(pk=pledge.project.id)
+        
+        # check if the project is open
+        if project.date_end.date() > datetime.datetime.now().date():
+        # delete the pledge - no serializer required
+            pledge.delete()
+            return Response(
+                { 'message': 'Pledge deleted' }, # response not returned
+                status=status.HTTP_204_NO_CONTENT 
+            )        
+        else:
+            return Response(
+                { 'message': "Project is not open" },
+                status=status.HTTP_400_BAD_REQUEST
+            )         
+
+    
+
+# Inherit from class ProjectList to return a count of total project, total pledges, $ amount of pledges, unique supporters
 class ProjectStatistics(ProjectList):
 
     def statistics(self,request):
