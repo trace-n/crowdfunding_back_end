@@ -18,11 +18,11 @@ by Tracey Nguyen
     - [X] Title
     - [X] Owner (a user)
     - [X] Description
-    - [ ] Image
+    - [X] Image
     - [X] Target amount to fundraise
-    - [ ] Whether it is currently open to accepting new supporters or not
+    - [X] Whether it is currently open to accepting new supporters or not 
     - [X] When the project was created
-    - [ ] When the project ends
+    - [X] When the project ends
     - [ ] School Name
     - [ ] Website
 
@@ -32,8 +32,10 @@ by Tracey Nguyen
     - [X] The project the pledge is for
     - [X] The supporter/user (i.e. who created the pledge)
     - [ ] Whether the pledge is anonymous or not
+    - [ ] If the project is not currently open, pledge cannot be created/updated 
+    - [X] If the supporter is not the project owner, pledge can be created
     - [X] A comment to go along with the pledge
-    - [ ] Other
+    - [ ] Other??
         
 * [] User can display/change/cancel Pledge
 * [] User can load avatar image and images related to project

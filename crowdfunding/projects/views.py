@@ -7,6 +7,7 @@ from django.http import Http404
 from rest_framework import status, permissions
 from .permissions import IsOwnerOrReadOnly, IsSupporterOrReadOnly, IsSupporterNotOwnerOrReadOnly
 from django.db.models import Sum
+import datetime 
 
 # Create your views here.
 
@@ -94,32 +95,47 @@ class PledgeList(APIView):
 
 
     def post(self, request):
-        
-        pledge = request.data
         # pledge is not saved yet, is in json format
+        pledge = request.data
+
         # print("pledge=", pledge, pledge['project'])
-        # self.check_object_permissions(self.request, pledge)
         project = Project.objects.get(pk=pledge['project'])
+
+        # check if the project is open for pledges
+        # check_open = project.date_end.isoformat() > datetime.datetime.now().isoformat()
+        # print("check_open=", check_open)
+
         # print("compare proj owner to request user",project.owner, request.user)
         # project owner must not be the requesting user when creating a pledge        
         self.check_object_permissions(self.request, project)
 
-        serializer = PledgeSerializer(data=request.data)
-        print(serializer)
+        if project.date_end.date() > datetime.datetime.now().date():
+            serializer = PledgeSerializer(data=request.data)
+            # print(serializer)
+            # print(serializer.initial_data['project'])
 
-        if serializer.is_valid():
-            serializer.save(supporter=request.user)            
-            # serializer.save()
-            # return Response(serializer.data)
+            if serializer.is_valid():
+                # print(serializer.validated_data)
+                print("ser_data",serializer.validated_data['project'].id)
+                
+                serializer.save(supporter=request.user)            
+                # serializer.save()
+                # return Response(serializer.data)
+                return Response(
+                    serializer.data, 
+                    status=status.HTTP_201_CREATED,
+                )
+            
             return Response(
-                serializer.data, 
-                status=status.HTTP_201_CREATED,
+                serializer.errors,
+                status=status.HTTP_400_BAD_REQUEST
             )
-        
-        return Response(
-            serializer.errors,
-            status=status.HTTP_400_BAD_REQUEST
-        )
+        else:
+            return Response(
+                # "Project is not open",
+                { 'message': "Project is not open" },                
+                status=status.HTTP_400_BAD_REQUEST
+            )
 
 class PledgeDetail(APIView):
     permission_classes = [
@@ -142,7 +158,13 @@ class PledgeDetail(APIView):
     
     def put(self, request, pk):
         pledge = self.get_object(pk)
+        print('pledge',pledge.project.id)
+        # print("pledge project", pledge['project'])
         self.check_object_permissions(self.request, pledge)
+
+        # project = Project.objects.get(pk=pledge['project'])
+        # check if the project is open before pledge can be changed
+        # if project.date_end.date() > datetime.datetime.now().date():
 
         serializer = PledgeDetailSerializer(
             instance=pledge,
@@ -151,6 +173,15 @@ class PledgeDetail(APIView):
         )
 
         if serializer.is_valid():
+#  check the serializer for the data to access if project is open
+            # print(serializer.validated_data)
+            print(serializer.validated_data['project'].id)
+            # project = Project.objects.get(pk=serializer.validated_data['project'])
+            
+            # print(project,"project")
+            # if project.date_end.date() > datetime.datetime.now().date():
+             
+
             serializer.save()
             return Response(
                 serializer.data,
@@ -161,6 +192,12 @@ class PledgeDetail(APIView):
             serializer.errors,
             status=status.HTTP_400_BAD_REQUEST
         )
+    
+        # else:
+        #     return Response(
+        #         { 'message': "Project is not open" },
+        #         status=status.HTTP_400_BAD_REQUEST
+        #     )        
 
 # Inherit from class ProjectLIst to return a count of total project, total pledges, $ amount of pledges, unique supporters
 class ProjectStatistics(ProjectList):

@@ -17,6 +17,8 @@ class IsSupporterNotOwnerOrReadOnly(permissions.BasePermission):
             if request.method in permissions.SAFE_METHODS:
                 return True
             # supporter cannot be the owner of project
+            return obj.owner != request.user
+    
 # for shell troubleshooting
 # from projects.models import Project, Pledge
 # x = Pledge.objects.get(pk=1)
@@ -29,6 +31,4 @@ class IsSupporterNotOwnerOrReadOnly(permissions.BasePermission):
 # print(x.project.owner == x.supporter)
 # True
 
-            # return obj.project.owner != request.user    
-
-            return obj.owner != request.user
+            # return obj.project.owner != request.user        
