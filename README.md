@@ -14,33 +14,31 @@ by Tracey Nguyen
     - [ ] Image
     - [ ] Bio
             
-* [] User can create, edit, display a project
+* [X] User can create, edit, display a project
     - [X] Title
     - [X] Owner (a user)
     - [X] Description
     - [X] Image
     - [X] Target amount to fundraise
     - [X] Whether it is currently open to accepting new supporters or not 
-    - [X] When the project was created
-    - [X] When the project ends
+    - [X] When the project was created (auto filled on initial creation)
+    - [X] When the project was changed (auto filled on create/update)
+    - [X] When the project ends (user defined)
+    - [X] User can edit project if they are the owner of the project    
     - [ ] School Name
     - [ ] Website
-
 
 * [] User can make a Pledge
     - [X] An amount
     - [X] The project the pledge is for
     - [X] The supporter/user (i.e. who created the pledge)
     - [ ] Whether the pledge is anonymous or not
-    - [X] If the project is not currently open, pledge cannot be created/updated 
     - [X] If the supporter is not the project owner, pledge can be created
-    - [] Supporter can delete pledge if the project is open
+           - [X] If the project is not currently open, pledge cannot be created               
     - [X] A comment to go along with the pledge
+    - [X] User can Change pledge if the project is open and they are the supporter   
+    - [X] User can delete pledge if the project is open and they are the supporter       
     - [ ] Other??
-        
-* [] User can display/change/cancel Pledge
-* [] User can load avatar image and images related to project
-
 
 
 ### Stretch Goals
