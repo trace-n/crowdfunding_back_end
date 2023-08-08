@@ -202,8 +202,9 @@ class PledgeDetail(APIView):
         # delete the pledge - no serializer required
             pledge.delete()
             return Response(
-                { 'message': 'Pledge deleted' }, # response not returned
+                # { 'message': 'Pledge deleted' }, # response not returned
                 status=status.HTTP_204_NO_CONTENT 
+                # status=status.HTTP_202_ACCEPTED
             )        
         else:
             return Response(

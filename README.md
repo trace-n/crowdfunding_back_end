@@ -71,10 +71,13 @@ by Tracey Nguyen
 | POST | pledges/ | Create a new pledge | Pledge object | 201 | User must be logged in.<br> User must not be the owner of the project<br>Project must be open|
 | GET | pledges/1/ | Return the pledge with ID of "1" | N/A | 200 | N/A |
 | PUT | pledges/1/ | Update the pledge with ID of "1" | Pledge object | 200 | User must be logged in.<br> User must be the pledge owner<br>Project must be open |
-| DELETE | pledges/1/ | Deletes the pledge with ID of "1" | Project object | 200 | User must be logged in.<br> User must be the pledge owner<br>Project must be open |
+| DELETE | pledges/1/ | Deletes the pledge with ID of "1" | Project object | 204 | User must be logged in.<br> User must be the pledge owner<br>Project must be open |
+| GET | users/ | Get all users | User object | 200 | N/A |
 | POST | users/ | Create a new user | User object | 201 | N/A |
 | GET | users/1/ | Return the user with ID of "1" | User object | 200 | User must be logged in |
 | PUT | users/1/ | Update the user with ID of "1" | User object | 200 | User must be logged in |
+| POST | api-token-auth | Create authentication token for user | N/A | 200 | Username and password must be supplied |
+| GET | projects/statistics | Return number of projects, pledges, total amount to date, number of unique supporters | N/A | 200 | N/A |
 
 ## Database Schema
 {{ Insert your database schema }}
