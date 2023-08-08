@@ -13,6 +13,9 @@ by Tracey Nguyen
     - [X] Password
     - [ ] Image
     - [ ] Bio
+
+* [X] User can change account profile details
+
             
 * [X] User can create, edit, display a project
     - [X] Title
@@ -98,6 +101,7 @@ Deployed Project: [Deployed website](http://linkhere.com/)
 
 ### How To Run
 {{ What steps to take to run this code }}
+get/post end url what is the json body
 
 ### Updated Database Schema
 {{ Updated schema }}
@@ -120,5 +124,5 @@ Deployed Project: [Deployed website](http://linkhere.com/)
 ![image info goes here](./docs/image.png)
 
 * [] A screenshot of Insomnia, demonstrating a token being returned.
-![image info goes here](./docs/image.png)
+![User token](./docs/image.png)
 
