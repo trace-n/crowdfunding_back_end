@@ -80,9 +80,9 @@ by Tracey Nguyen
 | GET | projects/statistics | Return number of projects, pledges, total amount to date, number of unique supporters | N/A | 200 | N/A |
 
 ## Database Schema
-{{ Insert your database schema }}
+Created wtih dbdiagram.io
 
-![image info goes here](./docs/image.png)
+![Database Schema](./readme_images/ERD%20-%20DRF%20Crowdfunding%20project.png "ERD Schema"))
 
 ## Wireframes
 {{ Insert your wireframes }}
@@ -105,6 +105,24 @@ Deployed Project: [Deployed website](http://linkhere.com/)
 ### How To Run
 {{ What steps to take to run this code }}
 get/post end url what is the json body
+
+| HTTP Method | URL | json body | Request Body | Successful Response Code | Authentication <br /> Authorization |
+| :---: | :--- | :--- | :--- | :---: | :--- |
+| GET | projects/ | Return all projects | N/A | 200 | N/A |
+| POST | projects/ | Create a new project | Project object | 201 | User must be logged in. |
+| GET | projects/1/ | Return the project with ID of "1" | N/A | 200 | N/A |
+| PUT | projects/1/ | Update the project with ID of "1" | Project object | 200 | User must be logged in.<br> User must be the project owner |
+| GET | pledges/ | Return all pledges | N/A | 200 | N/A |
+| POST | pledges/ | Create a new pledge | Pledge object | 201 | User must be logged in.<br> User must not be the owner of the project<br>Project must be open|
+| GET | pledges/1/ | Return the pledge with ID of "1" | N/A | 200 | N/A |
+| PUT | pledges/1/ | Update the pledge with ID of "1" | Pledge object | 200 | User must be logged in.<br> User must be the pledge owner<br>Project must be open |
+| DELETE | pledges/1/ | Deletes the pledge with ID of "1" | Project object | 204 | User must be logged in.<br> User must be the pledge owner<br>Project must be open |
+| GET | users/ | Get all users | User object | 200 | N/A |
+| POST | users/ | Create a new user | User object | 201 | N/A |
+| GET | users/1/ | Return the user with ID of "1" | User object | 200 | User must be logged in |
+| PUT | users/1/ | Update the user with ID of "1" | User object | 200 | User must be logged in |
+| POST | api-token-auth | Create authentication token for user | N/A | 200 | Username and password must be supplied |
+| GET | projects/statistics | Return number of projects, pledges, total amount to date, number of unique supporters | N/A | 200 | N/A |
 
 ### Updated Database Schema
 {{ Updated schema }}
