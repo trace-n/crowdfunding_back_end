@@ -100,16 +100,23 @@ Created wtih dbdiagram.io
 ## Submission Documentation
 {{ Fill this section out for submission }}
 
-Deployed Project: [Deployed website](http://linkhere.com/)
+Deployed Project: [Deployed website](https://unicorn-rainbow-1618.fly.dev/projects/)
 
 ### How To Run
 {{ What steps to take to run this code }}
 get/post end url what is the json body
 
-| HTTP Method | URL | json body | Request Body | Successful Response Code | Authentication <br /> Authorization |
+| HTTP Method | URL | Request Body (json) | Request Body | Successful Response Code | Authentication <br /> Authorization |
 | :---: | :--- | :--- | :--- | :---: | :--- |
-| GET | projects/ | Return all projects | N/A | 200 | N/A |
-| POST | projects/ | Create a new project | Project object | 201 | User must be logged in. |
+| GET | https://unicorn-rainbow-1618.fly.dev/projects/ | {
+	"title": "Another project change me here",
+	"description": "Another project put did not work",
+	"goal": 1000,
+	"image": "https://via.placeholder.com/300.jpg",
+	"is_open": true,
+	"date_end": "2023-10-31T23:53:30.592856Z"
+} | N/A | 200 | N/A |
+| POST | https://unicorn-rainbow-1618.fly.dev/projects/ | Create a new project | Project object | 201 | User must be logged in. |
 | GET | projects/1/ | Return the project with ID of "1" | N/A | 200 | N/A |
 | PUT | projects/1/ | Update the project with ID of "1" | Project object | 200 | User must be logged in.<br> User must be the project owner |
 | GET | pledges/ | Return all pledges | N/A | 200 | N/A |
