@@ -1,9 +1,9 @@
-# DRF SheCodes Project - {{Name of }} - Crowdfunding website
+# DRF SheCodes Project - {Name}} - Crowdfunding website
 by Tracey Nguyen
 - She Codes crowdfunding project - DRF Backend.
 
 ## About
-{{ A paragraph detailing the purpose and target audience for your website. }}
+This website is a crowdfunding website to enable fundraising for school events.
 
 ## Features
 
@@ -78,9 +78,9 @@ Release 1 - back end API features include:
 | GET | projects/statistics/ | Return number of projects, pledges, total amount to date, number of unique supporters | N/A | 200 | N/A |
 
 ## Database Schema
-Created wtih dbdiagram.io
+Created with dbdiagram.io
 
-![Database Schema](./readme_images/ERD%20-%20DRF%20Crowdfunding%20project.png "ERD Schema"))
+![Database Schema](./readme_images/ERD%20-%20DRF%20Crowdfunding%20project.png "ERD Schema")
 
 ## Submission Documentation
 
@@ -142,7 +142,7 @@ Step by step instructions for how to register a new user and create a new projec
 | ![ Create project bearer token](./readme_images/3a_POST_Create_Project_bearer_token.png "Create project bearer token") |
 
 
-## Release 2 - front end website
+## Release 2 - Front End Website
 
 ### Wireframes
 
