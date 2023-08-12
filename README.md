@@ -1,6 +1,6 @@
 # DRF SheCodes Project - Fundling - Crowdfunding website
 by Tracey Nguyen
-- She Codes crowdfunding project - DRF Backend.
+- She Codes crowdfunding project - Django Rest Framework (DRF) Backend.
 
 ## About
 "Fundling" is a crowdfunding website to enable fundraising for things related to kids events. Think of school fairs, sporting events, volunteering, camps or excursions. The site enables kids to post about an event and get awareness for community support and fundraising.
