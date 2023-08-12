@@ -13,6 +13,7 @@ Release 1 - back end API features include:
     - [X] Username
     - [X] Email
     - [X] Password
+    - [X] Image
 
 * [X] User can only change their own account profile details
             
@@ -43,7 +44,6 @@ Release 1 - back end API features include:
 
 * [X] Display statistics on the home page # projects, pledges, $, unique supporters
 * [] Users:
-    - [] Image
     - [] Bio
 * [] Add additional fields for projects
     - [] School Name
