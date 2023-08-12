@@ -2,9 +2,10 @@ from django.shortcuts import render
 from django.http import Http404
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework import status
+from rest_framework import status, permissions
 from .models import CustomUser
 from .serializers import CustomUserSerializer
+from .permissions import IsAuthenticatedUser
 
 # Create your views here.
 
@@ -29,10 +30,17 @@ class CustomUserList(APIView):
             )
 
 class CustomUserDetail(APIView):
-    
+    permission_classes = [
+        permissions.IsAuthenticatedOrReadOnly,
+        IsAuthenticatedUser
+    ]    
+
     def get_object(self, pk):
         try: 
-            return CustomUser.objects.get(pk=pk)
+            user = CustomUser.objects.get(pk=pk)
+            self.check_object_permissions(self.request, user)          
+            # return CustomUser.objects.get(pk=pk)
+            return user
         except CustomUser.DoesNotExist:
             raise Http404
         
