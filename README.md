@@ -14,7 +14,7 @@ Release 1 - back end API features include:
     - [X] Email
     - [X] Password
 
-* [X] User can change account profile details
+* [X] User can only change their own account profile details
             
 * [X] User can create, edit, display a project
     - [X] Title
@@ -74,7 +74,7 @@ Release 1 - back end API features include:
 | POST | api-token-auth/ | Create authentication token for user | N/A | 200 | Username and password must be supplied |
 | PUT | projects/1/ | Update the project with ID of "1" | Project object | 200 | User must be logged in.<br> User must be the project owner |
 | PUT | pledges/1/ | Update the pledge with ID of "1" | Pledge object | 200 | User must be logged in.<br> User must be the pledge owner<br>Project must be open |
-| PUT | users/1/ | Update the user with ID of "1" | User object | 200 | User must be logged in |
+| PUT | users/1/ | Update the user with ID of "1" | User object | 200 | User must be logged in and can only edit own account |
 | DELETE | pledges/1/ | Deletes the pledge with ID of "1" | Project object | 204 | User must be logged in.<br> User must be the pledge owner<br>Project must be open |
 
 ## Database Schema
