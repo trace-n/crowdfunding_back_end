@@ -1,9 +1,9 @@
-# DRF SheCodes Project - {Name}} - Crowdfunding website
+# DRF SheCodes Project - Fundling - Crowdfunding website
 by Tracey Nguyen
 - She Codes crowdfunding project - DRF Backend.
 
 ## About
-This website is a crowdfunding website to enable fundraising for school events.
+"Fundling" is a crowdfunding website to enable fundraising for things related to kids events. Think of school fairs, sporting events, volunteering, camps or excursions. The site enables kids to post about an event and get awareness for community support and fundraising.
 
 ## Features
 
@@ -62,20 +62,20 @@ Release 1 - back end API features include:
 | HTTP Method | URL | Purpose | Request Body | Successful Response Code | Authentication <br /> Authorization |
 | :---: | :--- | :--- | :--- | :---: | :--- |
 | GET | projects/ | Return all projects | N/A | 200 | N/A |
-| POST | projects/ | Create a new project | Project object | 201 | User must be logged in. |
 | GET | projects/1/ | Return the project with ID of "1" | N/A | 200 | N/A |
-| PUT | projects/1/ | Update the project with ID of "1" | Project object | 200 | User must be logged in.<br> User must be the project owner |
 | GET | pledges/ | Return all pledges | N/A | 200 | N/A |
-| POST | pledges/ | Create a new pledge | Pledge object | 201 | User must be logged in.<br> User must not be the owner of the project<br>Project must be open|
 | GET | pledges/1/ | Return the pledge with ID of "1" | N/A | 200 | N/A |
-| PUT | pledges/1/ | Update the pledge with ID of "1" | Pledge object | 200 | User must be logged in.<br> User must be the pledge owner<br>Project must be open |
-| DELETE | pledges/1/ | Deletes the pledge with ID of "1" | Project object | 204 | User must be logged in.<br> User must be the pledge owner<br>Project must be open |
 | GET | users/ | Get all users | User object | 200 | N/A |
-| POST | users/ | Create a new user | User object | 201 | N/A |
 | GET | users/1/ | Return the user with ID of "1" | User object | 200 | User must be logged in |
-| PUT | users/1/ | Update the user with ID of "1" | User object | 200 | User must be logged in |
-| POST | api-token-auth/ | Create authentication token for user | N/A | 200 | Username and password must be supplied |
 | GET | projects/statistics/ | Return number of projects, pledges, total amount to date, number of unique supporters | N/A | 200 | N/A |
+| POST | projects/ | Create a new project | Project object | 201 | User must be logged in. |
+| POST | pledges/ | Create a new pledge | Pledge object | 201 | User must be logged in.<br> User must not be the owner of the project<br>Project must be open|
+| POST | users/ | Create a new user | User object | 201 | N/A |
+| POST | api-token-auth/ | Create authentication token for user | N/A | 200 | Username and password must be supplied |
+| PUT | projects/1/ | Update the project with ID of "1" | Project object | 200 | User must be logged in.<br> User must be the project owner |
+| PUT | pledges/1/ | Update the pledge with ID of "1" | Pledge object | 200 | User must be logged in.<br> User must be the pledge owner<br>Project must be open |
+| PUT | users/1/ | Update the user with ID of "1" | User object | 200 | User must be logged in |
+| DELETE | pledges/1/ | Deletes the pledge with ID of "1" | Project object | 204 | User must be logged in.<br> User must be the pledge owner<br>Project must be open |
 
 ## Database Schema
 Created with dbdiagram.io
@@ -95,20 +95,21 @@ Steps to call APIs
 | HTTP Method | URL | Request Body (json) | Successful Response Code | 
 | :---: | :--- | :--- | :---: | 
 | GET | https://unicorn-rainbow-1618.fly.dev/projects/ | N/A | 200 |
-| POST | https://unicorn-rainbow-1618.fly.dev/projects/ | { <br><ul> title": "Project Title", <br> 	"description": "Project description", <br> 	"goal": 10000, <br> 	"image": "https://via.placeholder.com/300.jpg",<br>"is_open": true,<br> 	"date_end": "2023-10-31T23:53:30.592856Z"<br></ul> } | 201 | 
 | GET | https://unicorn-rainbow-1618.fly.dev/projects/1/ | N/A| 200 | 
-| PUT | https://unicorn-rainbow-1618.fly.dev/projects/1/ | {<br><ul>"title": "Project title",<br>	"description": "Project updated",<br>	"goal": 75000,<br>"image": https://via.placeholder.com/300.jpg",<br>	"date_end": "2023-11-30T23:53:30.592856Z"<br></ul>} | 200 | 
 | GET | https://unicorn-rainbow-1618.fly.dev/pledges/ | N/A| 200 | 
-| POST | https://unicorn-rainbow-1618.fly.dev/pledges/ | {<br><ul>	"supporter": 1,<br>	"amount": 100000,<br>	"comment": "Love this project!",<br>	"anonymous": false,<br>	"project": 4<br></ul>} | 201 | 
 | GET | https://unicorn-rainbow-1618.fly.dev/pledges/1/ | N/A | 200 |  
-| PUT | https://unicorn-rainbow-1618.fly.dev/pledges/1/ | {<br><ul>	"supporter": 1,<br>	"amount": 100000,<br>	"comment": "Love this project!",<br>	"anonymous": false,<br>	"project": 4<br></ul>}  | 200 |  
-| DELETE | https://unicorn-rainbow-1618.fly.dev/pledges/1/ | N/A | 204 |  
 | GET | https://unicorn-rainbow-1618.fly.dev/users/ | N/A| 200 |  
-| POST | https://unicorn-rainbow-1618.fly.dev/users/ | { <br><ul> 	"username": "new_user",<br> 	"password": "Welcome@123" <br></ul>} | 201 |  
 | GET | https://unicorn-rainbow-1618.fly.dev/users/1/ | N/A | 200 |  
-| PUT | https://unicorn-rainbow-1618.fly.dev/users/1/ | {<br><ul>	"username": "new_user", <br>	"first_name": "Moon",<br>	"last_name": "Sparkle",<br>	"email": "moon@sparkle.com"<br></ul>} | 200 |  
-| POST | https://unicorn-rainbow-1618.fly.dev/api-token-auth/ |  { <br><ul> 	"username": "new_user",<br> 	"password": "Welcome@123" <br></ul>} | 200 |  
 | GET | https://unicorn-rainbow-1618.fly.dev/projects/statistics/ | N/A | 200 |  
+| POST | https://unicorn-rainbow-1618.fly.dev/projects/ | { <br><ul> title": "Project Title", <br> 	"description": "Project description", <br> 	"goal": 10000, <br> 	"image": "https://via.placeholder.com/300.jpg",<br>"is_open": true,<br> 	"date_end": "2023-10-31T23:53:30.592856Z"<br></ul> } | 201 | 
+| POST | https://unicorn-rainbow-1618.fly.dev/pledges/ | {<br><ul>	"supporter": 1,<br>	"amount": 100000,<br>	"comment": "Love this project!",<br>	"anonymous": false,<br>	"project": 4<br></ul>} | 201 | 
+| POST | https://unicorn-rainbow-1618.fly.dev/users/ | { <br><ul> 	"username": "new_user",<br> 	"password": "Welcome@123" <br></ul>} | 201 |  
+| POST | https://unicorn-rainbow-1618.fly.dev/api-token-auth/ |  { <br><ul> 	"username": "new_user",<br> 	"password": "Welcome@123" <br></ul>} | 200 |  
+| PUT | https://unicorn-rainbow-1618.fly.dev/projects/1/ | {<br><ul>"title": "Project title",<br>	"description": "Project updated",<br>	"goal": 75000,<br>"image": https://via.placeholder.com/300.jpg",<br>	"date_end": "2023-11-30T23:53:30.592856Z"<br></ul>} | 200 | 
+| PUT | https://unicorn-rainbow-1618.fly.dev/pledges/1/ | {<br><ul>	"supporter": 1,<br>	"amount": 100000,<br>	"comment": "Love this project!",<br>	"anonymous": false,<br>	"project": 4<br></ul>}  | 200 |  
+| PUT | https://unicorn-rainbow-1618.fly.dev/users/1/ | {<br><ul>	"username": "new_user", <br>	"first_name": "Moon",<br>	"last_name": "Sparkle",<br>	"email": "moon@sparkle.com"<br></ul>} | 200 |  
+| DELETE | https://unicorn-rainbow-1618.fly.dev/pledges/1/ | N/A | 204 |  
+
 
 
 ### How To Register a New User
