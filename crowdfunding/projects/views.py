@@ -19,16 +19,12 @@ class ProjectList(APIView):
         serializer = ProjectSerializer(projects, many=True)
         return Response(serializer.data)
 
-    # def get_queryset(self):
-    #     projects = Project.objects.all()
-    #     return projects
-
     def post(self, request):
         serializer = ProjectSerializer(data=request.data)
         if serializer.is_valid():
-            # serializer.save()
+
             serializer.save(owner=request.user)
-            # return Response(serializer.data)
+
             return Response(
                 serializer.data, 
                 status=status.HTTP_201_CREATED
@@ -46,9 +42,8 @@ class ProjectDetail(APIView):
     ]
 
     def get_object(self, pk):
-        # return Project.objects.get(pk=pk) 
+
         try: 
-            # return Project.objects.get(pk=pk)
             project = Project.objects.get(pk=pk)
             self.check_object_permissions(self.request, project)
             return project
@@ -82,7 +77,13 @@ class ProjectDetail(APIView):
             status=status.HTTP_400_BAD_REQUEST
         )
     
-    # def del(self, request, pk):
+    def delete(self, request, pk):
+        project = self.get_object(pk)
+        project.delete()
+
+        return Response(
+            status=status.HTTP_204_NO_CONTENT 
+            )        
 
 class PledgeList(APIView):
     permission_classes = [
@@ -100,10 +101,8 @@ class PledgeList(APIView):
         # pledge is not saved yet, is in json format
         pledge = request.data
 
-        # print("pledge=", pledge, pledge['project'])
         project = Project.objects.get(pk=pledge['project'])
 
-        # print("compare proj owner to request user",project.owner, request.user)
         # project owner must not be the requesting user when creating a pledge        
         self.check_object_permissions(self.request, project)
 
@@ -111,12 +110,9 @@ class PledgeList(APIView):
             serializer = PledgeSerializer(data=request.data)
 
             if serializer.is_valid():
-                # print(serializer.validated_data)
-                # print("ser_data",serializer.validated_data['project'].id)
                 
                 serializer.save(supporter=request.user)            
-                # serializer.save()
-                # return Response(serializer.data)
+
                 return Response(
                     serializer.data, 
                     status=status.HTTP_201_CREATED,
@@ -153,13 +149,7 @@ class PledgeDetail(APIView):
     
     def put(self, request, pk):
         pledge = self.get_object(pk)
-        # print('pledge',pledge.project.id)
-        # print("pledge project", pledge['project'])
         self.check_object_permissions(self.request, pledge)
-
-        # project = Project.objects.get(pk=pledge['project'])
-        # check if the project is open before pledge can be changed
-        # if project.date_end.date() > datetime.datetime.now().date():
 
         serializer = PledgeDetailSerializer(
             instance=pledge,
@@ -169,7 +159,6 @@ class PledgeDetail(APIView):
 
         if serializer.is_valid():
             #  check the serializer for the data to access if project is open
-            # print(serializer.validated_data['project'].id)
             project = Project.objects.get(pk=serializer.validated_data['project'].id)
             
             if project.date_end.date() > datetime.datetime.now().date():
@@ -184,7 +173,6 @@ class PledgeDetail(APIView):
                     { 'message': "Project is not open" },
                     status=status.HTTP_400_BAD_REQUEST
                 )      
-
         
         return Response(
             serializer.errors,
@@ -202,9 +190,8 @@ class PledgeDetail(APIView):
         # delete the pledge - no serializer required
             pledge.delete()
             return Response(
-                # { 'message': 'Pledge deleted' }, # response not returned
                 status=status.HTTP_204_NO_CONTENT 
-                # status=status.HTTP_202_ACCEPTED
+                
             )        
         else:
             return Response(
@@ -218,8 +205,6 @@ class PledgeDetail(APIView):
 class ProjectStatistics(ProjectList):
 
     def statistics(self,request):
-        # projects = self.get_queryset()
-
         projects = Project.objects.all()
         pledges = Pledge.objects.all() 
         pledges_amt = pledges.aggregate(Sum('amount'))
@@ -235,7 +220,3 @@ class ProjectStatistics(ProjectList):
     def get(self, request):
         return self.statistics(request)
 
-    # def get(self, request):
-    #     projects = Project.objects.all()
-    #     # serializer = ProjectSerializer(projects, many=True)
-    #     return Response("hello")

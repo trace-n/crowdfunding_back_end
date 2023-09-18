@@ -27,7 +27,9 @@ Release 1 - back end API features include:
     - [X] When the project was created (auto filled on initial creation)
     - [X] When the project was changed (auto filled on create/update)
     - [X] When the project ends (user defined)
-    - [X] User can edit project if they are the owner of the project    
+    - [X] User can edit project if they are the owner of the project   
+    - [X] User can delete project if they are the owner of the project   
+     
 
 * [X] User can make a Pledge
     - [X] An amount
@@ -53,9 +55,9 @@ Release 1 - back end API features include:
 * [] Change currency/language
 * [] Remind me
 * [] Like / Dislike
-* [] Percentage funded - display as graph
-* [] Days to go/ left for deadline
-* [] Last donation
+* [X] Percentage funded - display as graph
+* [X] Days to go/ left for deadline
+* [X] Last 5 donations
 
 ## API Specification
 
@@ -75,7 +77,8 @@ Release 1 - back end API features include:
 | PUT | projects/1/ | Update the project with ID of "1" | Project object | 200 | User must be logged in.<br> User must be the project owner |
 | PUT | pledges/1/ | Update the pledge with ID of "1" | Pledge object | 200 | User must be logged in.<br> User must be the pledge owner<br>Project must be open |
 | PUT | users/1/ | Update the user with ID of "1" | User object | 200 | User must be logged in and can only edit own account |
-| DELETE | pledges/1/ | Deletes the pledge with ID of "1" | Project object | 204 | User must be logged in.<br> User must be the pledge owner<br>Project must be open |
+| DELETE | pledges/1/ | Deletes the pledge with ID of "1" | Pledge object | 204 | User must be logged in.<br> User must be the pledge owner<br>Project must be open |
+| DELETE | projects/1/ | Deletes the project with ID of "1" | Project object | 204 | User must be logged in.<br> User must be the project owner |
 
 ## Database Schema
 Created with dbdiagram.io
@@ -84,11 +87,14 @@ Created with dbdiagram.io
 
 ## Submission Documentation
 
-Deployed Project: [https://unicorn-rainbow-1618.fly.dev/projects/](https://unicorn-rainbow-1618.fly.dev/projects/)
+* Deployed Project: [https://unicorn-rainbow-1618.fly.dev/projects/](https://unicorn-rainbow-1618.fly.dev/projects/)
+
+
+* Github Repository: [https://github.com/trace-n/crowdfunding_back_end](https://github.com/trace-n/crowdfunding_back_end "Github repo")
 
 ### How To Run
 
-Steps to call APIs
+* Steps to call APIs
 
 * All POST, PUT, DELETE methods use Bearer Token for user authentication in Insomnia
 
@@ -109,7 +115,6 @@ Steps to call APIs
 | PUT | https://unicorn-rainbow-1618.fly.dev/pledges/1/ | {<br><ul>	"supporter": 1,<br>	"amount": 100000,<br>	"comment": "Love this project!",<br>	"anonymous": false,<br>	"project": 4<br></ul>}  | 200 |  
 | PUT | https://unicorn-rainbow-1618.fly.dev/users/1/ | {<br><ul>	"username": "new_user", <br>	"first_name": "Moon",<br>	"last_name": "Sparkle",<br>	"email": "moon@sparkle.com"<br></ul>} | 200 |  
 | DELETE | https://unicorn-rainbow-1618.fly.dev/pledges/1/ | N/A | 204 |  
-
 
 
 ### How To Register a New User
@@ -143,18 +148,40 @@ Step by step instructions for how to register a new user and create a new projec
 | ![ Create project bearer token](./readme_images/3a_POST_Create_Project_bearer_token.png "Create project bearer token") |
 
 
+## How To Run Locally
+
+| Commands | Description |  
+| :---: | :---: |  
+| . venv/Scripts/activate | Run local virtual environment for development |
+| python manage.py runserver | Run local webserver for development |
+| git   | Any changes will need to be made and pushed to git to update on fly.dev backend site |
+
+## Summary of project files
+| Folder | File | Description |  
+| :---: | :---: | :---: |  
+| crowdfunding |  | Parent working directory | 
+| crowdfunding | settings.py | Settings for site  |
+| crowdfunding | urls.py | Include project and user app urls |
+| projects  | * | Project app |
+| users | * | Users app | 
+| projects, users | models.py | Models to reference database | 
+| projects, users | permissions.py | Manage permissions for projects app | 
+| projects, users | serializers.py | Map data from views to models  | 
+| projects, users | urls.py | Endpoints for API URLS | 
+| projects, users | views.py | Manage API calls to the backend via the serializers and models | 
+| base | db.sqlite3 | Local database |
+| base | requirements | Libraries |
+| base | .gitignore | Exclude for github repo  |
+| base | Dockerfile | For deployment to fly.dev |
+| base | fly.toml | For deployment to fly.dev |
+| base | README.md | Readme file for this repository |
+| readme_images | README.md | Readme image files  |
+
+
 ## Release 2 - Front End Website
 
-### Wireframes
+### Deployed Frontend React Project
+* [https://fundling.netlify.app/] (https://fundling.netlify.app/)
 
-{{ Insert your wireframes }}
-
-![image info goes here](./docs/image.png)
-
-### Colour Scheme
-{{ Insert your colour scheme }}
-
-![image info goes here](./docs/image.png)
-
-### Fonts
-{{ outline your heading & body font(s) }}
+### Github Repository
+* [https://github.com/trace-n/crowdfunding_front_end](https://github.com/trace-n/crowdfunding_front_end "Github repo")
