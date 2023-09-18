@@ -151,14 +151,14 @@ Step by step instructions for how to register a new user and create a new projec
 ## How To Run Locally
 
 | Commands | Description |  
-| :---: | :---: |  
+| :---: | :--- |  
 | . venv/Scripts/activate | Run local virtual environment for development |
 | python manage.py runserver | Run local webserver for development |
 | git   | Any changes will need to be made and pushed to git to update on fly.dev backend site |
 
 ## Summary of project files
 | Folder | File | Description |  
-| :---: | :---: | :---: |  
+| :---: | :---: | :--- |  
 | crowdfunding |  | Parent working directory | 
 | crowdfunding | settings.py | Settings for site  |
 | crowdfunding | urls.py | Include project and user app urls |
@@ -175,13 +175,13 @@ Step by step instructions for how to register a new user and create a new projec
 | base | Dockerfile | For deployment to fly.dev |
 | base | fly.toml | For deployment to fly.dev |
 | base | README.md | Readme file for this repository |
-| readme_images | README.md | Readme image files  |
+| readme_images | * | Readme image files  |
 
 
 ## Release 2 - Front End Website
 
 ### Deployed Frontend React Project
-* [https://fundling.netlify.app/] (https://fundling.netlify.app/)
+* [https://fundling.netlify.app/](https://fundling.netlify.app/)
 
 ### Github Repository
 * [https://github.com/trace-n/crowdfunding_front_end](https://github.com/trace-n/crowdfunding_front_end "Github repo")
